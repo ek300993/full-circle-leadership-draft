@@ -48,7 +48,7 @@
 	root.classList.add( 'fcl-motion' );
 
 	// Groups whose children arrive one after another, rather than all at once.
-	var groups = '.fcl-grid, .fcl-quotes, .fcl-lenses, .fcl-essays, .fcl-thread';
+	var groups = '.fcl-grid, .fcl-quotes, .fcl-lenses, .fcl-essays, .fcl-thread, .fcl-situations, .fcl-steps';
 	var targets = [];
 	document.querySelectorAll( '.fcl-main .fcl-band > *' ).forEach( function ( el ) {
 		if ( el.matches( groups ) ) {
