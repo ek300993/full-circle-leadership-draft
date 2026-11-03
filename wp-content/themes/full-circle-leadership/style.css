@@ -841,12 +841,12 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 .fcl-why > * { margin: 0 !important; }
 /* That's why Full Circle Leadership: its four points two by two, each beside a ring that
    fills a quarter further than the last, so the fourth, in the prism colours, completes the
-   circle. Hairlines over each pair keep the rows even however many lines a point runs to. The
+   circle. A single hairline above and below the list, and one between the pairs, keep the rows even however many lines a point runs to. The
    rings fill in turn as the row arrives. */
 @property --fill { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
-.fcl-why__list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); padding: 0 !important; }
+.fcl-why__list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); padding: 0 !important; border-block: 1px solid var(--line); }
 .fcl-why__list li { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: start; column-gap: var(--space-5); margin: 0; padding-block: var(--space-5); border-top: 1px solid var(--line); font-family: var(--font-serif); font-size: clamp(17px, 1.3vw, 19px); line-height: 1.55; color: var(--ink); text-wrap: pretty; }
-.fcl-why__list li:nth-last-child(-n + 2) { border-bottom: 1px solid var(--line); }
+.fcl-why__list li:nth-child(-n + 2) { border-top: 0; }
 .fcl-why__list li::before { --fill: 25%; content: ""; display: block; width: 44px; height: 44px; margin-block-start: -.15em; border-radius: 50%; background: conic-gradient(var(--accent) 0 var(--fill), var(--line) var(--fill) 100%); -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px)); mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px)); }
 .fcl-why__list li:nth-child(2)::before { --fill: 50%; }
 .fcl-why__list li:nth-child(3)::before { --fill: 75%; }
@@ -886,7 +886,7 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 	.fcl-why__list { grid-template-columns: minmax(0, 1fr); }
 	.fcl-why__list li { grid-template-columns: 36px minmax(0, 1fr); column-gap: var(--space-4); padding-block: var(--space-4); }
 	.fcl-why__list li::before { width: 36px; height: 36px; }
-	.fcl-why__list li:nth-last-child(2) { border-bottom: 0; }
+	.fcl-why__list li:nth-child(2) { border-top: 1px solid var(--line); }
 	.fcl-manifesto-band > .fcl-mrow--first { margin-block-start: 0 !important; padding-block-start: 0; }
 	.fcl-mrow > :not(.fcl-mrow__label) { grid-column: auto; }
 	.fcl-beliefs { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
