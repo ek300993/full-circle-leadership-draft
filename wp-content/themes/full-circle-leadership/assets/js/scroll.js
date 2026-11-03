@@ -48,7 +48,7 @@
 	root.classList.add( 'fcl-motion' );
 
 	// Groups whose children arrive one after another, rather than all at once.
-	var groups = '.fcl-grid, .fcl-quotes, .fcl-lenses, .fcl-essays, .fcl-thread, .fcl-situations, .fcl-steps';
+	var groups = '.fcl-grid, .fcl-quotes, .fcl-lenses, .fcl-essays, .fcl-thread, .fcl-situations, .fcl-steps, .fcl-book-questions';
 	var targets = [];
 	document.querySelectorAll( '.fcl-main .fcl-band > *' ).forEach( function ( el ) {
 		if ( el.matches( groups ) ) {
@@ -59,6 +59,13 @@
 		} else {
 			targets.push( el );
 		}
+	} );
+	// Lists inside a section that still arrive item by item.
+	document.querySelectorAll( '.fcl-main .fcl-diagnosis' ).forEach( function ( list ) {
+		Array.prototype.forEach.call( list.children, function ( child, i ) {
+			child.style.setProperty( '--i', Math.min( i, 6 ) + 2 );
+			targets.push( child );
+		} );
 	} );
 	document.querySelectorAll( '.fcl-rule' ).forEach( function ( el ) {
 		targets.push( el );

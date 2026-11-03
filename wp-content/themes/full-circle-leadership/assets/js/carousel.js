@@ -11,7 +11,8 @@
  * keeps them in step as the track is swiped or scrolled and labels the parts for screen
  * readers.
  *
- * Rotation waits while the pointer is over the carousel or focus is inside it, while it is
+ * Rotation waits while the pointer is over the carousel or focus is inside it, while a dialog
+ * is open (such as a full endorsement), while it is
  * off screen or the tab is hidden, and while its top is scrolled out of view (on phones a
  * slide is taller than the screen, so someone is reading it). It stops for good once the
  * track is touched, and never starts for people who ask for reduced motion. Without this
@@ -93,8 +94,13 @@
 		track.insertBefore( copy( slides[ n - 1 ] ), slides[ 0 ] );
 		track.appendChild( copy( slides[ 0 ] ) );
 		var all = Array.prototype.slice.call( track.children );
+		// Where the track scrolls to show a position: the track has padding at its sides (its
+		// faded edges), so a slide's resting point is its offset less that padding.
+		var left = function ( pos ) {
+			return all[ pos ].offsetLeft - parseFloat( getComputedStyle( track ).paddingLeft );
+		};
 		var at = function ( pos ) {
-			track.scrollTo( { left: all[ pos ].offsetLeft, behavior: 'instant' } );
+			track.scrollTo( { left: left( pos ), behavior: 'instant' } );
 		};
 		at( 1 );
 		window.addEventListener( 'resize', function () {
@@ -121,7 +127,7 @@
 				at( i + 1 );
 			} else {
 				target = pos;
-				track.scrollTo( { left: all[ pos ].offsetLeft, behavior: 'smooth' } );
+				track.scrollTo( { left: left( pos ), behavior: 'smooth' } );
 			}
 			show( i );
 		}
@@ -159,14 +165,14 @@
 		var pending = 0;
 		var resting = 0;
 		var position = function () {
-			return Math.max( 0, Math.min( n + 1, Math.round( track.scrollLeft / track.clientWidth ) ) );
+			return Math.max( 0, Math.min( n + 1, Math.round( track.scrollLeft / ( all[ 1 ].offsetLeft - all[ 0 ].offsetLeft ) ) ) );
 		};
 		track.addEventListener( 'scroll', function () {
 			cancelAnimationFrame( pending );
 			pending = requestAnimationFrame( function () {
 				var pos = position();
 				if ( target !== null ) {
-					if ( pos === target && Math.abs( track.scrollLeft - all[ pos ].offsetLeft ) < 2 ) {
+					if ( pos === target && Math.abs( track.scrollLeft - left( pos ) ) < 2 ) {
 						target = null;
 					}
 					return;
@@ -179,7 +185,7 @@
 			clearTimeout( resting );
 			resting = setTimeout( function () {
 				var pos = position();
-				if ( ( pos === 0 || pos === n + 1 ) && Math.abs( track.scrollLeft - all[ pos ].offsetLeft ) < 2 ) {
+				if ( ( pos === 0 || pos === n + 1 ) && Math.abs( track.scrollLeft - left( pos ) ) < 2 ) {
 					target = null;
 					at( pos === 0 ? n : 1 );
 				}
@@ -198,7 +204,7 @@
 		var focused = false;
 		var onScreen = false;
 		function canPlay() {
-			return ! motion.matches && ! paused && ! stopped && ! hovered && ! focused && ! below && onScreen && ! document.hidden;
+			return ! motion.matches && ! paused && ! stopped && ! hovered && ! focused && ! below && onScreen && ! document.hidden && ! document.querySelector( 'dialog[open]' );
 		}
 		function schedule() {
 			if ( timer ) {
@@ -268,6 +274,7 @@
 			{ passive: true }
 		);
 		document.addEventListener( 'visibilitychange', schedule );
+		document.addEventListener( 'fcl-dialog', schedule );
 		if ( motion.addEventListener ) {
 			motion.addEventListener( 'change', schedule );
 		}
