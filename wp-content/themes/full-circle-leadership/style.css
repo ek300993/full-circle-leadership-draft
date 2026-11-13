@@ -157,6 +157,8 @@ p.fcl-ph { box-sizing: border-box; }
 .fcl-wordmark a { color: inherit; text-decoration: none; }
 .fcl-wordmark__strong { font-weight: 800; letter-spacing: -.025em; color: var(--ink); }
 .fcl-wordmark__light { font-weight: 300; letter-spacing: -.01em; color: var(--accent); }
+/* The trademark sign after the name: small, light and raised, so it doesn't disturb the line height. */
+.fcl-tm { position: relative; top: -1em; margin-left: .08em; font-size: .32em; font-weight: 400; line-height: 0; letter-spacing: 0; vertical-align: baseline; }
 .fcl-wordmark--inline { font-size: 19px; }
 /* Temporary logo: the ring mark before the wordmark, drawn from CSS so swapping in the final
    logo touches only this rule and the file. */
@@ -984,6 +986,8 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 .fcl-practice-band .wp-block-button.is-style-secondary .wp-block-button__link { color: #fff; border-color: rgba(255, 255, 255, .4); }
 .fcl-practice-band .wp-block-button.is-style-secondary .wp-block-button__link:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
 .fcl-main:has(#areas-of-practice) .fcl-practice-band__more { display: none; }
+/* On the Services page the band keeps only its eyebrow: "Bringing the whole into view" heads it on the home page alone. */
+.fcl-main:has(#areas-of-practice) .fcl-practice-band__head h2 { display: none; }
 @media (max-width: 1100px) {
 	.fcl-situations { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5) var(--space-6); }
 	.fcl-practice-band > .fcl-practice-band__inquiry { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
@@ -1089,7 +1093,7 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 	letter-spacing: .02em;
 	color: color-mix(in srgb, var(--ink) 55%, transparent);
 }
-/* Michele and Tim: the photo sits at the top left and the name and background wrap around it,
+/* Michèle and Tim: the photo sits at the top left and the name and background wrap around it,
    then carry on at full width beneath it. */
 /* About Us: the partnership paragraph opens the section, the two profiles follow. */
 /* It spans the full frame, set a touch larger so the long lines still read as one statement. */
@@ -1098,6 +1102,9 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 .fcl-band.fcl-people > .fcl-lede { position: relative; padding-top: var(--space-6); }
 .fcl-band.fcl-people > .fcl-lede::before { content: ""; position: absolute; top: 0; left: 0; width: 72px; height: 2px; border-radius: 1px; background: var(--prism-line); }
 .fcl-people > .fcl-lede + .fcl-lenses { margin-block-start: var(--space-7); }
+/* Beneath the two profiles, what they share: the closing paragraph, led in by the short prism bar. */
+.fcl-people > .fcl-lenses + .fcl-people__together { position: relative; margin-block-start: var(--space-7); padding-top: var(--space-5); max-width: 52rem; font-family: var(--font-serif); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; font-variation-settings: 'opsz' 24; color: var(--ink); text-wrap: pretty; }
+.fcl-people > .fcl-lenses + .fcl-people__together::before { content: ""; position: absolute; top: 0; left: 0; width: 48px; height: 2px; border-radius: 1px; background: var(--prism-line); }
 .fcl-person { display: flow-root; }
 .fcl-person > * { margin: 0 !important; }
 .fcl-person > :is(.fcl-portrait, .fcl-ph-photo) { float: left; width: min(42%, 200px); margin: 4px var(--space-5) var(--space-4) 0 !important; }
