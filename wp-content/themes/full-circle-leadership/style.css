@@ -541,6 +541,14 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 
 /* ---------- Endorsements ---------- */
 /* Home: the book as manifesto, then three endorsements under a hairline. */
+/* It sits on its own soft sky ground (the wash the giving band had), so it stands apart from
+   the white About section above and the mist blog band below. */
+.fcl-book-band {
+	background:
+		radial-gradient(34rem 24rem at 10% 30%, color-mix(in srgb, var(--prism-cyan) 22%, transparent), transparent 70%),
+		radial-gradient(32rem 20rem at 90% 8%, color-mix(in srgb, var(--prism-rose) 14%, transparent), transparent 70%),
+		linear-gradient(120deg, var(--mist-100) 0%, color-mix(in srgb, var(--sky) 32%, var(--mist-100)) 100%);
+}
 .fcl-manifesto__praise { margin-block-start: var(--space-8) !important; padding-block-start: var(--space-7); border-top: 1px solid var(--ring-light); }
 .fcl-manifesto__praise > .fcl-eyebrow + * { margin-block-start: var(--space-5) !important; }
 .fcl-manifesto__praise > .fcl-more { margin-block-start: var(--space-6) !important; font-family: var(--font-sans); font-size: 14px; font-weight: 600; }
@@ -975,22 +983,27 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 .fcl-practice-band__coda::before { content: ""; display: block; width: 56px; height: 2px; margin: 0 auto var(--space-4); border-radius: 1px; background: var(--prism-line); }
 .fcl-practice-band > .fcl-practice-band__inquiry { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: start; gap: var(--space-7); margin-block-start: var(--space-6) !important; padding-block-start: var(--space-6); border-top: 1px solid rgba(255, 255, 255, .12); }
 .fcl-practice-band__inquiry > * { margin: 0 !important; }
-.fcl-practice-band__inquiry > p { font-size: 17px; line-height: 1.6; color: rgba(255, 255, 255, .72); }
+.fcl-practice-band__intro > p:first-child { margin: 0; font-size: 17px; line-height: 1.6; color: rgba(255, 255, 255, .72); }
 .fcl-questions { list-style: none; padding: 0 !important; }
 .fcl-questions li { position: relative; padding: 0 0 0 var(--space-5); font-family: var(--font-serif); font-size: clamp(18px, 1.4vw, 20px); font-style: italic; line-height: 1.4; color: #fff; }
 .fcl-questions li + li { margin-block-start: var(--space-3); }
 .fcl-questions li::before { content: ""; position: absolute; left: 0; top: .62em; width: 10px; height: 10px; box-sizing: border-box; border: 1.5px solid var(--prism-cyan); border-radius: 50%; }
-/* Learn more: a light outline button, centred under the band; not on the practice page, which
-   the band already sits on. */
-.fcl-practice-band > .fcl-practice-band__more { justify-content: center; max-width: none; margin: var(--space-7) auto 0 !important; }
-.fcl-practice-band .wp-block-button.is-style-secondary .wp-block-button__link { color: #fff; border-color: rgba(255, 255, 255, .4); }
-.fcl-practice-band .wp-block-button.is-style-secondary .wp-block-button__link:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
-.fcl-main:has(#areas-of-practice) .fcl-practice-band__more { display: none; }
-/* On the Services page the band keeps only its eyebrow: "Bringing the whole into view" heads it on the home page alone. */
-.fcl-main:has(#areas-of-practice) .fcl-practice-band__head h2 { display: none; }
+/* Learn more: the band's call to action, closing the left-hand column. A white pill with the
+   site buttons' shape and type, so it stands out on the dark band; its arrow slides on hover. */
+.fcl-practice-band__more { margin: var(--space-6) 0 0 !important; }
+/* (Specific enough to beat the phone rule that pads a lone link for tapping.) */
+.fcl-practice-band p.fcl-practice-band__more > a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; box-sizing: border-box; margin: 0; padding: 11px 22px 11px 24px; border-radius: 999px; background: #fff; font-family: var(--font-sans); font-size: 15px; font-weight: 600; line-height: 20px; color: var(--ink); text-decoration: none; box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--prism-cyan) 55%, transparent); transition: background-color .2s ease, box-shadow .2s ease; }
+.fcl-practice-band__more a::after { content: "\2192"; color: var(--ring); transition: transform .2s ease; }
+.fcl-practice-band__more a:hover { background: color-mix(in srgb, var(--prism-cyan) 14%, #fff); box-shadow: 0 8px 26px -8px color-mix(in srgb, var(--prism-cyan) 75%, transparent); }
+.fcl-practice-band__more a:hover::after { transform: translateX(3px); }
+.fcl-practice-band__more a:focus-visible { outline: 2px solid var(--prism-cyan); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .fcl-practice-band__more a, .fcl-practice-band__more a::after { transition: none; } }
 @media (max-width: 1100px) {
 	.fcl-situations { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5) var(--space-6); }
 	.fcl-practice-band > .fcl-practice-band__inquiry { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+	/* Stacked, the link follows the questions rather than splitting them from the paragraph. */
+	.fcl-practice-band__intro { display: contents; }
+	.fcl-practice-band__inquiry > .fcl-practice-band__intro > .fcl-practice-band__more { order: 1; margin: var(--space-2) 0 0 !important; }
 }
 @media (max-width: 600px) {
 	.fcl-practice-band { padding-block: 56px !important; --fcl-rings: linear-gradient(transparent, transparent); }
@@ -1102,8 +1115,8 @@ header.wp-block-template-part { view-transition-name: fcl-header; }
 .fcl-band.fcl-people > .fcl-lede { position: relative; padding-top: var(--space-6); }
 .fcl-band.fcl-people > .fcl-lede::before { content: ""; position: absolute; top: 0; left: 0; width: 72px; height: 2px; border-radius: 1px; background: var(--prism-line); }
 .fcl-people > .fcl-lede + .fcl-lenses { margin-block-start: var(--space-7); }
-/* Beneath the two profiles, what they share: the closing paragraph, led in by the short prism bar. */
-.fcl-people > .fcl-lenses + .fcl-people__together { position: relative; margin-block-start: var(--space-7); padding-top: var(--space-5); max-width: 52rem; font-family: var(--font-serif); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; font-variation-settings: 'opsz' 24; color: var(--ink); text-wrap: pretty; }
+/* Beneath the two profiles, what they share: the closing paragraph, across the full frame like the opening one, led in by the short prism bar. */
+.fcl-people > .fcl-lenses + .fcl-people__together { position: relative; margin-block-start: var(--space-7); padding-top: var(--space-5); max-width: 72rem; font-family: var(--font-serif); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; font-variation-settings: 'opsz' 24; color: var(--ink); text-wrap: pretty; }
 .fcl-people > .fcl-lenses + .fcl-people__together::before { content: ""; position: absolute; top: 0; left: 0; width: 48px; height: 2px; border-radius: 1px; background: var(--prism-line); }
 .fcl-person { display: flow-root; }
 .fcl-person > * { margin: 0 !important; }
